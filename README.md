@@ -11,7 +11,9 @@
 
 ## Interacting with Contracts
 
-To interact with the contracts, you can use the "debug contracts" function provided in the application. This function allows you to test and interact with the deployed smart contracts.
+**How to Register:** To interact with the contracts, you can use the "debug contracts" function provided in the application. This function allows you to test and interact with the deployed smart contracts.
+
+![Debug Contracts tab](https://github.com/tippi-fifestarr/scaffold-eth-2/assets/62179036/b0b67ea5-bf87-472a-8ba6-5c0369e8b9c7)
 
 ## Main Page Features
 
@@ -37,9 +39,6 @@ To interact with the contracts, you can use the "debug contracts" function provi
 - 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
-
-## How to Register
-![Debug Contracts tab](https://github.com/tippi-fifestarr/scaffold-eth-2/assets/62179036/b0b67ea5-bf87-472a-8ba6-5c0369e8b9c7)
 
 ## Requirements
 
