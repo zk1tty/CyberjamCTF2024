@@ -22,7 +22,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("HuntRegistration", {
+  await deploy("HuntRegistration3", {
     from: deployer,
     // Contract constructor arguments
     args: [],
@@ -33,7 +33,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   });
 
   // Get the deployed contract to interact with it after deploying.
-  const yourContract = await hre.ethers.getContract<Contract>("HuntRegistration", deployer);
+  const yourContract = await hre.ethers.getContract<Contract>("HuntRegistration3", deployer);
   console.log("👋 Initial greeting: hello ", await yourContract.owner());
 };
 

@@ -5,7 +5,7 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/ICyberjamHuntBase.sol";
 
-contract HuntRegistration is Ownable {
+contract HuntRegistration2 is Ownable {
     struct Team {
         address addr;
         string name;
@@ -46,7 +46,7 @@ contract HuntRegistration is Ownable {
         address teamAddress = s_teams[teamIndex].addr;
         for (uint256 i = 0; i < s_gameAddresses.length; i++) {
             address gameAddress = s_gameAddresses[i];
-            if (ICyberJamHuntBase(gameAddress).s_hasNft(teamAddress)) {
+            if (ICyberjamHuntBase(gameAddress).s_hasNft(teamAddress)) {
                 teamScore = teamScore + 1;
             }
         }
