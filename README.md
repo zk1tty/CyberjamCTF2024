@@ -1,13 +1,36 @@
-# 🏗 Scaffold-ETH 2
+# 🏗 Cat vs Dog CTF with ETHChicago, Cyberjam & Scaffold-ETH 2
 
 <h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
+  <a href="https://docs.scaffoldeth.io">SE-2 Docs</a> |
+  <a href="https://www.youtube.com/watch?v=Qu6LKDAfDZI">Cyberjam Recap</a> |
+  <a href="https://discord.gg/qe8ETgMskt">ETHChicago Discord</a> 
 </h4>
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins'  Star Wars CTF using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+
+## Interacting with Contracts
+
+To interact with the contracts, you can use the "debug contracts" function provided in the application. This function allows you to test and interact with the deployed smart contracts.
+
+## Main Page Features
+
+1. Display Two Teams Image:
+   - [ ] Display images of the two teams in medium size to represent them visually.
+
+2. Leaderboard:
+   - [ ] Display a list of the leaderboard with the following information:
+     - [ ] Ranking #
+     - [ ] Codename
+     - [ ] Small dynamic NFT image
+     - [ ] Score
+
+3. Refresh Button:
+   - [ ] Include a refresh button that triggers a read function using the useContractRead hook to fetch the latest scores or leaderboard data.
+
+
+
+[Scaffold-ETH-2](https://youtu.be/DcOzXhaxtt4?list=PLJz1HruEnenAf80uOfDwBPqaliJkjKg69): ⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
 
 - ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
 - 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
@@ -15,6 +38,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
 - 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
 
+## How to start playing
 ![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
 ## Requirements
