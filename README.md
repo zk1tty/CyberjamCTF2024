@@ -16,17 +16,24 @@ To interact with the contracts, you can use the "debug contracts" function provi
 ## Main Page Features
 
 1. Display Two Teams Image:
-   - [ ] Display images of the two teams in medium size to represent them visually.
+   - [x] Display images of the two teams in medium size to represent them visually.
+   - [ ] Center a current score counter for each team.
 
 2. Leaderboard:
-   - [ ] Display a list of the leaderboard with the following information:
+   - [ ] Display a list of the players leaderboard with the following information:
      - [ ] Ranking #
-     - [ ] Codename
+     - [x] Codename & address
+     - [x] Team
      - [ ] Small dynamic NFT image
      - [ ] Score
 
 3. Refresh Button:
    - [ ] Include a refresh button that triggers a read function using the useContractRead hook to fetch the latest scores or leaderboard data.
+
+4. Stretch Goals:
+   - [ ] Timer countdown to the end of the game.
+   - [ ] Graph the scores over time
+   - [ ] Add a "Join Game" button to allow new players to join the game (redirect to debug contracts)
 
 
 

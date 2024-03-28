@@ -6,8 +6,8 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    HuntRegistration3: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    HuntRegistration4: {
+      address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: [
         {
           inputs: [],
@@ -50,7 +50,7 @@ const deployedContracts = {
             },
             {
               indexed: false,
-              internalType: "enum HuntRegistration3.Team",
+              internalType: "enum HuntRegistration4.Team",
               name: "team",
               type: "uint8",
             },
@@ -63,7 +63,7 @@ const deployedContracts = {
           inputs: [
             {
               indexed: false,
-              internalType: "enum HuntRegistration3.Team",
+              internalType: "enum HuntRegistration4.Team",
               name: "team",
               type: "uint8",
             },
@@ -76,6 +76,45 @@ const deployedContracts = {
           ],
           name: "TeamScoreUpdated",
           type: "event",
+        },
+        {
+          inputs: [],
+          name: "PLAYER_ADDRESS_1",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "PLAYER_ADDRESS_2",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "PLAYER_ADDRESS_3",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
         },
         {
           inputs: [
@@ -98,7 +137,7 @@ const deployedContracts = {
               type: "address",
             },
             {
-              internalType: "enum HuntRegistration3.Team",
+              internalType: "enum HuntRegistration4.Team",
               name: "team",
               type: "uint8",
             },
@@ -118,6 +157,36 @@ const deployedContracts = {
           name: "emitTeamScores",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPlayers",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "addr",
+                  type: "address",
+                },
+                {
+                  internalType: "enum HuntRegistration4.Team",
+                  name: "team",
+                  type: "uint8",
+                },
+                {
+                  internalType: "string",
+                  name: "codename",
+                  type: "string",
+                },
+              ],
+              internalType: "struct HuntRegistration4.Player[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
           type: "function",
         },
         {
@@ -174,7 +243,7 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "enum HuntRegistration3.Team",
+              internalType: "enum HuntRegistration4.Team",
               name: "team",
               type: "uint8",
             },
@@ -206,7 +275,7 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "enum HuntRegistration3.Team",
+              internalType: "enum HuntRegistration4.Team",
               name: "team",
               type: "uint8",
             },
