@@ -3,7 +3,7 @@ pragma solidity 0.8.20;
 
 import "./CyberJamHuntBase.sol";
 
-contract E3 is CyberJamHuntBase {
+contract E1 is CyberJamHuntBase {
     constructor() CyberJamHuntBase("E3") {}
 
     function mintNft(uint256 value) public {
