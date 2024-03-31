@@ -2,7 +2,7 @@
 pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "base64-sol/base64.sol";
+import "../base64-sol/base64.sol";
 
 contract CyberjamHuntBase is ERC721 {
     // TODO: change the TOKEN_IMAGE_BASE_URI

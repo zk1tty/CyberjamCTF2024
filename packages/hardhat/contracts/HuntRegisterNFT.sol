@@ -5,8 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol"; 
 import "./interfaces/ICyberjamHuntBase.sol";
-import "base64-sol/base64.sol";
-import "hardhat/console.sol";
+import "./base64-sol/base64.sol";
 
 contract HuntRegisterNFT is ERC721, Ownable {
     enum Team { Cat, Dog } // Enum for the two teams
@@ -36,7 +35,7 @@ contract HuntRegisterNFT is ERC721, Ownable {
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
     event TeamScoreUpdated(Team team, uint256 newScore);
 
-    constructor(address initialOwner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(initialOwner) {
+    constructor() ERC721("HuntRegisterNFT", "HRNFT"){
         tokenCounter = 0;
     }
 
