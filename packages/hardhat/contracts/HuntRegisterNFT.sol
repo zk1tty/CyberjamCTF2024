@@ -30,12 +30,12 @@ contract HuntRegisterNFT is ERC721, Ownable {
     // TODO: set Token URI
     string public constant TOKEN_IMAGE_URI = "";
 
-    // TODO: FE integation test
     // Events
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
     event TeamScoreUpdated(Team team, uint256 newScore);
 
-    constructor() ERC721("HuntRegisterNFT", "HRNFT"){
+    // TODO: Remove Ownable argument before testnet deployment.
+    constructor(address owner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(owner){
         tokenCounter = 0;
     }
 
@@ -81,7 +81,7 @@ contract HuntRegisterNFT is ERC721, Ownable {
     }
 
     // Note: Score used for NFT attributes
-    function updatePlayerScore(address playerAddress) public returns (uint256) {
+    function _updatePlayerScore(address playerAddress) private returns (uint256) {
         uint256 playerScore = 0;
         for (uint256 i = 0; i < gameAddresses.length; i++) {
             if (ICyberjamHuntBase(gameAddresses[i]).hasNft(playerAddress)) {
@@ -95,7 +95,7 @@ contract HuntRegisterNFT is ERC721, Ownable {
 
     // Level used for NFT attributes
     function updatePlayerLevel(address playerAddress) public returns (uint256) {
-        uint256 playerScore = updatePlayerScore(playerAddress);
+        uint256 playerScore = _updatePlayerScore(playerAddress);
         uint256 level = 5 > playerScore && playerScore > 0
             ? 1
             : playerScore == 5
@@ -115,8 +115,14 @@ contract HuntRegisterNFT is ERC721, Ownable {
         return gameAddresses[gameId];
     }
 
-    function getPlayerInfo(uint256 tokenId) public view returns (uint256) {
-        return players[tokenId].score;
+    function getPlayerInfo(address player) external view returns(Player memory){
+        uint256 tokenId = tokenIdFromPlayerAddress[player];
+        return players[tokenId];
+    }
+
+     // This function returns an array of all players
+    function getAllPlayers() external view returns (Player[] memory) {
+        return players;
     }
 
     // Q: Why do we need this?
@@ -153,5 +159,10 @@ contract HuntRegisterNFT is ERC721, Ownable {
                 )
             )
         );
+    }
+
+    function tokenURIByPlayer(address player) public view returns (string memory) {
+        uint256 tokenId = tokenIdFromPlayerAddress[player];
+        return tokenURI(tokenId);
     }
 }
