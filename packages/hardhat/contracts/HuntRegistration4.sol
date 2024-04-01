@@ -76,7 +76,7 @@ contract HuntRegistration4 is Ownable {
         return playerScore;
     }
 
-     // This function returns an array of all players
+     // This function returns an array of all players, to be sorted by the frontend
     function getAllPlayers() external view returns (Player[] memory) {
         return players;
     }

@@ -9,7 +9,7 @@
 🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins'  Star Wars CTF using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
 
 
-## Interacting with Contracts
+## Interacting with Blockchain Smart Contracts
 
 **How to Register:** To interact with the contracts, you can use the "debug contracts" function provided in the application. This function allows you to test and interact with the deployed smart contracts.
 

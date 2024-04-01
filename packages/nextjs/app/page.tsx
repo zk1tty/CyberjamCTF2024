@@ -34,12 +34,23 @@ const Home: NextPage = () => {
             <Address address={connectedAddress} />
           </div>
           {allPlayers?.map((player, index) => (
-            <div key={index} className="bg-base-100 p-4 rounded-lg my-4">
-              <p className="font-bold">Player: {player.codename}</p>
-              <p>Address: {player.addr}</p>
-              <p>Team: {player.team === 0 ? "Cat" : "Dog"}</p>
+            <div key={index} className="flex bg-base-100 p-1 rounded-lg my-4 items-center justify-center">
+              <div className="flex p-0.5 items-center space-x-2">
+                <p className="font-bold">Player: {player.codename}</p>
+                <p>Address: {player.addr}</p>
+                <div className="w-5 h-5 flex items-center justify-center">
+                  {" "}
+                  {/* Container for image */}
+                  {player.team === 0 ? (
+                    <img src="/catbg.png" alt="Cat" className="object-cover w-full h-full" />
+                  ) : (
+                    <img src="/doge-removebg-preview.png" alt="Dog" className="object-cover w-full h-full" />
+                  )}
+                </div>
+              </div>
             </div>
           ))}
+
           <p className="text-center text-lg">
             Get started by editing{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
