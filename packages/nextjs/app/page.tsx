@@ -1,22 +1,45 @@
 "use client";
 
 import Link from "next/link";
+import NFTImageViewer from "./NFTImageViewer";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const { data: numberOfPlayers } = useScaffoldContractRead({
-    contractName: "HuntRegistration4",
+    contractName: "HuntRegisterNFT",
     functionName: "getNumberOfPlayers",
   });
 
   const { data: allPlayers } = useScaffoldContractRead({
-    contractName: "HuntRegistration4",
+    contractName: "HuntRegisterNFT",
     functionName: "getAllPlayers",
+  });
+
+  // const { data: playerInfo } = useScaffoldContractRead({
+  //   contractName: "HuntRegisterNFT",
+  //   functionName: "getPlayerInfo",
+  //   args: [connectedAddress],
+  // });
+
+  const { data: tokenURI } = useScaffoldContractRead({
+    contractName: "HuntRegisterNFT",
+    functionName: "tokenURIByPlayer",
+    args: [connectedAddress],
+  });
+
+  const { writeAsync } = useScaffoldContractWrite({
+    contractName: "HuntRegisterNFT",
+    functionName: "updatePlayerLevel",
+    args: [connectedAddress],
+    blockConfirmations: 1,
+    onBlockConfirmation: txnReceipt => {
+      console.log("Transaction blockHash", txnReceipt.blockHash);
+    },
   });
 
   return (
@@ -33,13 +56,31 @@ const Home: NextPage = () => {
             <p className="my-2 font-medium">Connected Address:</p>
             <Address address={connectedAddress} />
           </div>
+
+          <>
+            <p className="text-center text-lg">
+              <li>1. Register to HuntRegisterNFT → Get your first NFT</li>
+              <li>2. Refresh current your score and level when you clear each quiz.</li>
+            </p>
+          </>
+          <h2 className="text-center">
+            <button className="btn btn-primary" onClick={() => writeAsync()}>
+              Refresh Score
+            </button>
+          </h2>
+
+          <NFTImageViewer metadataUrl={tokenURI ?? ""} />
+
           {allPlayers?.map((player, index) => (
             <div key={index} className="bg-base-100 p-4 rounded-lg my-4">
               <p className="font-bold">Player: {player.codename}</p>
               <p>Address: {player.addr}</p>
               <p>Team: {player.team === 0 ? "Cat" : "Dog"}</p>
+              <p>Score: {player.score.toString()}</p>
+              <p>Level: {player.level.toString()}</p>
             </div>
           ))}
+
           <p className="text-center text-lg">
             Get started by editing{" "}
             <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
