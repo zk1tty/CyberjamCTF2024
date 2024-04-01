@@ -27,14 +27,23 @@ contract HuntRegisterNFT is ERC721, Ownable {
     // Note: for looking up tokenId with playerAddress 
     mapping(address => uint256 tokenId) public tokenIdFromPlayerAddress;
 
-    // TODO: set Token URI
-    string public constant TOKEN_IMAGE_URI = "";
+    // Note: Put folder CID of image folder on IPFS 
+    // FOLDER_CID:
+    //   L Cat
+    //      L 0.png
+    //      L 1.png
+    //      L 2.png
+    //   L Dog
+    //      L 0.png
+    //      L 1.png
+    //      L 2.png
+    string public constant TOKEN_IMAGE_FOLDER_CID = "QmQ376dPDNZrKb2E2GVEaeTWxpMvLUvprn1tRRd4qtBT19";
 
+    // TODO: FE integation test
     // Events
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
     event TeamScoreUpdated(Team team, uint256 newScore);
 
-    // TODO: Remove Ownable argument before testnet deployment.
     constructor(address owner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(owner){
         tokenCounter = 0;
     }
@@ -138,6 +147,8 @@ contract HuntRegisterNFT is ERC721, Ownable {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         string memory playerScore = Strings.toString(players[tokenId].score);
         string memory playerLevel = Strings.toString(players[tokenId].level);
+        string memory playerTeam = players[tokenId].team == Team.Cat ? "Cat" : "Dog"; // Cat or Dog
+        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER_CID, "/", playerTeam, "/", playerLevel, ".png");
         return string(
             abi.encodePacked(
                 _baseURI(),
@@ -152,7 +163,7 @@ contract HuntRegisterNFT is ERC721, Ownable {
                             '}, {"trait_type": "Level", "value":',
                             playerLevel,
                             '}], "image":"',
-                            TOKEN_IMAGE_URI,
+                            tokenURL,
                             '"}'
                         )
                     )
