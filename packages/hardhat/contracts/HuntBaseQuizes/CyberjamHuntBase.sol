@@ -2,14 +2,20 @@
 pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "../base64-sol/base64.sol";
+import "base64-sol/base64.sol";
 
 contract CyberjamHuntBase is ERC721 {
-    // TODO: change the TOKEN_IMAGE_BASE_URI
-    string public constant TOKEN_IMAGE_URI =
-        "attachments/1217126145334575205/1221931759965311047/Cyberjammers.png?ex=66145fa1&is=6601eaa1&hm=26df4de5d5003f8ae903558fd149a84539ca050e8ecb656149835ac3e25a5d64&";
+    // Note:  file structure 
+    // cyberjam(TOKEN_IMAGE_FOLDER)
+    //   L E1.png
+    //   L E2.png
+    //   L M1.png
+    //   L M2.png
+    string public constant TOKEN_IMAGE_FOLDER = "QmXUC1dwxchyA5Y7wDV8c7WTQDuYjBfPE4kW1rw8tTLN2c";
     uint256 internal s_tokenCounter;
     mapping(address => bool) public s_hasNft;
+    // Note: 0-4 currently,
+    // Update: e1-e3, m1-m3
     string difficulty;
 
     event nftMinted(string difficulty, address player);
@@ -20,7 +26,7 @@ contract CyberjamHuntBase is ERC721 {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://cdn.discordapp.com/";
+        return "data:application/json;base64,";
     }
 
     function _mintByAddress(address addr) internal {
@@ -38,6 +44,7 @@ contract CyberjamHuntBase is ERC721 {
     }
 
     function tokenURI(uint256 /* tokenId */ ) public view override returns (string memory) {
+        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER, "/", difficulty, ".png");
         return string(
             abi.encodePacked(
                 _baseURI(),
@@ -48,7 +55,7 @@ contract CyberjamHuntBase is ERC721 {
                             name(),
                             '", "description":"You captured this NFT as part of the Hunt!", ',
                             '"attributes": [{"trait_type": "skills", "value": 100}], "image":"',
-                            TOKEN_IMAGE_URI,
+                            tokenURL,
                             '"}'
                         )
                     )
