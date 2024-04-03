@@ -4461,6 +4461,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"base64-sol@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "base64-sol@npm:1.1.0"
+  checksum: 9bea828af71e6adcf7c841cf0001e03bd1eae8cc1aef86daedb36f04117b2a626ac23631f700d56a24515f88c2021d7ebdbee4608369f66c53e51c0b4b39ee47
+  languageName: node
+  linkType: hard
+
 "bcrypt-pbkdf@npm:^1.0.0":
   version: 1.0.2
   resolution: "bcrypt-pbkdf@npm:1.0.2"
@@ -12272,6 +12279,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "se-2@workspace:."
   dependencies:
+    base64-sol: ^1.1.0
     husky: ^8.0.1
     lint-staged: ^13.0.3
   languageName: unknown

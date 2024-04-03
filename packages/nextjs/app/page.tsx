@@ -1,5 +1,9 @@
 "use client";
 
+// TODO:
+// players to get address and team name
+// getPlayerScores returns list of playeScores with the same order as 'players' struct
+// getPlayersLevels returns list of levels(0 to 4) with same order with 'players' struct
 import Link from "next/link";
 import NFTImageViewer from "./NFTImageViewer";
 import type { NextPage } from "next";
@@ -42,6 +46,14 @@ const Home: NextPage = () => {
     },
   });
 
+  interface PlayerType {
+    codename: string;
+    addr: string;
+    team: number;
+    score: number;
+    level: number;
+  }
+
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
@@ -71,7 +83,7 @@ const Home: NextPage = () => {
 
           <NFTImageViewer metadataUrl={tokenURI ?? ""} />
 
-          {allPlayers?.map((player, index) => (
+          {allPlayers?.map((player: PlayerType, index: number) => (
             <div key={index} className="bg-base-100 p-4 rounded-lg my-4">
               <p className="font-bold">Player: {player.codename}</p>
               <p>Address: {player.addr}</p>

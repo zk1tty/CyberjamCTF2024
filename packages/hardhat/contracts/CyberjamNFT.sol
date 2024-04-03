@@ -18,6 +18,7 @@ contract CyberjamNFT is ERC721, Ownable {
 
     Player[] public players; // Array of players instead of teams
 
+    // QUESTION for @zkitty, it looks like you only want 5 points total, so we only have 5 contracts?
     address[] private gameAddresses;
 
     uint256 internal tokenCounter;
@@ -26,6 +27,8 @@ contract CyberjamNFT is ERC721, Ownable {
     mapping(address => uint256 tokenId) public tokenIdFromPlayerAddress;
 
     // Note: Put folder CID of image folder on IPFS 
+    // Tippi made a shitty level 0 image for each team
+    // so we can expand to 4 levels of images
     // FOLDER_CID:
     //   L Cat
     //      L 0.png
@@ -40,7 +43,7 @@ contract CyberjamNFT is ERC721, Ownable {
     // Events
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
 
-    constructor(address owner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(owner){
+    constructor() ERC721("HuntRegisterNFT", "HRNFT") Ownable(){
         tokenCounter = 0;
     }
 
@@ -66,8 +69,6 @@ contract CyberjamNFT is ERC721, Ownable {
         tokenIdFromPlayerAddress[msg.sender] = tokenCounter ++;
         emit PlayerRegistered(codename, msg.sender, team, 0, 0);
     }
-
-    // Note: The original function `kickTeam` has been omitted as it might not align with the new design.
 
     function getTeamScore(string memory teamString) public view returns (uint256) {
         Team team = _stringToTeam(teamString);
@@ -111,6 +112,7 @@ contract CyberjamNFT is ERC721, Ownable {
         uint256 playerScore = getPlayerScore(playerAddress);
         uint256 level = 5 > playerScore && playerScore > 0
             ? 1
+            // is 5 the max score?
             : playerScore == 5
             ? 3
             : 0;
@@ -118,6 +120,7 @@ contract CyberjamNFT is ERC721, Ownable {
     }
 
     // for leaderboard page
+    // returns all of the players levels
     function getPlayersLevels() public view returns (uint256[] memory) {
         uint256[] memory playerLevels = new uint256[](30);
         for (uint256 i = 0; i < players.length; i++) {
