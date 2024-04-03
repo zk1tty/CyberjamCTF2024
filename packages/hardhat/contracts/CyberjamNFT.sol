@@ -101,7 +101,7 @@ contract CyberjamNFT is ERC721, Ownable {
         uint256[] memory playerScores = new uint256[](30);
         for (uint256 i = 0; i < players.length; i++) {
             address plaerAddr = players[i].addr;
-            playerScores[i] = (getPlayerScore(plaerAddr));
+            playerScores[i] = getPlayerScore(plaerAddr);
         }
         return playerScores;
     }
@@ -116,7 +116,8 @@ contract CyberjamNFT is ERC721, Ownable {
             : 0;
         return level;
     }
-        // for leaderboard page
+
+    // for leaderboard page
     function getPlayersLevels() public view returns (uint256[] memory) {
         uint256[] memory playerLevels = new uint256[](30);
         for (uint256 i = 0; i < players.length; i++) {
@@ -131,7 +132,7 @@ contract CyberjamNFT is ERC721, Ownable {
         }
         return playerLevels;
     }
-    
+
     function getNumberOfPlayers() external view returns (uint256) {
         return players.length;
     }
@@ -158,7 +159,9 @@ contract CyberjamNFT is ERC721, Ownable {
         uint256 score = getPlayerScore(players[tokenId].addr);
         string memory playerScore = Strings.toString(score);
         string memory playerLevel = Strings.toString(getPlayerLevel(players[tokenId].addr));
-        string memory playerTeam = players[tokenId].team == Team.Cat ? "Cat" : "Dog"; // Cat or Dog
+        string memory playerTeam = players[tokenId].team == Team.Cat ? "Kitty" : "Doge"; 
+        string memory animalSound = players[tokenId].team == Team.Cat ? "Meow Meow" : "Woof Woof";
+        string memory animal = players[tokenId].team == Team.Cat ? "cat" : "doge";
         string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER_CID, "/", playerTeam, "/", playerLevel, ".png");
         return string(
             abi.encodePacked(
@@ -168,8 +171,16 @@ contract CyberjamNFT is ERC721, Ownable {
                         abi.encodePacked(
                             '{"name":"',
                             name(),
-                            '", "description":"You captured this NFT as part of the Hunt!", ',
-                            '"attributes": [{"trait_type": "Score", "value":',
+                            '", "description":"You played at Cyphercon 2024. ',
+                            animalSound,
+                            '! You are a good ',
+                            animal,
+                            ' with ',
+                            playerScore,
+                            ' number of points.", ',
+                            '"attributes": [{"trait_type": "Team", "value":',
+                            playerTeam,
+                            '}, {"trait_type": "Score", "value":',
                             playerScore,
                             '}, {"trait_type": "Level", "value":',
                             playerLevel,

@@ -49,7 +49,7 @@ contract FlagNFTBase is ERC721 {
     }
 
     function tokenURI(uint256 /* tokenId */ ) public view override returns (string memory) {
-        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER, "/", difficulty, ".png");
+        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER, "/", difficulty, level, ".png");
         string memory difficultyValue = compareStrings(difficulty, "E") ? "easy"
             : compareStrings(difficulty, "M") ? "medium"
             : compareStrings(difficulty, "H") ? "hard"
@@ -63,9 +63,9 @@ contract FlagNFTBase is ERC721 {
                             '{"name":"',
                             name(),
                             '", "description":"You captured this NFT by solving a solidity puzzle!", ',
-                            '"attributes": [{"trait_type": "difficulty", "value":',
+                            '"attributes": [{"trait_type": "difficulty", "value":"',
                             difficultyValue,
-                            '}, {"trait_type": "level", "value":',
+                            '"}, {"trait_type": "level", "value":',
                             level,
                             '}], "image":"',
                             tokenURL,
