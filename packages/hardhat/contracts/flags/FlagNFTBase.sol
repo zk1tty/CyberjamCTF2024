@@ -4,25 +4,30 @@ pragma solidity 0.8.20;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "base64-sol/base64.sol";
 
-contract CyberjamHuntBase is ERC721 {
+contract FlagNFTBase is ERC721 {
     // Note:  file structure 
     // cyberjam(TOKEN_IMAGE_FOLDER)
-    //   L E1.png
-    //   L E2.png
-    //   L M1.png
-    //   L M2.png
+    // L E1.png
+    // L E2.png
+    // L M1.png
+    // L M2.png
     string public constant TOKEN_IMAGE_FOLDER = "QmXUC1dwxchyA5Y7wDV8c7WTQDuYjBfPE4kW1rw8tTLN2c";
     uint256 internal s_tokenCounter;
     mapping(address => bool) public s_hasNft;
-    // Note: 0-4 currently,
-    // Update: e1-e3, m1-m3
+
+    // difficulty: E(easy), M(medium), H(hard)
     string difficulty;
+    // level: 1,2,3,4...
+    string level;
 
     event nftMinted(string difficulty, address player);
 
-    constructor(string memory _difficulty) ERC721(string.concat("CyberJam Hunt NFT | ", _difficulty), "CVSD24") {
+    // _difficulty: E(easy), M(medium), H(hard)
+    // _level: 1,2,3,4...
+    constructor(string memory _difficulty, string memory _level) ERC721(string.concat("Cyberjam CTF | ", _difficulty, _level), "CVSD24") {
         s_tokenCounter = 0;
         difficulty = _difficulty;
+        level= _level;
     }
 
     function _baseURI() internal pure override returns (string memory) {
@@ -45,6 +50,10 @@ contract CyberjamHuntBase is ERC721 {
 
     function tokenURI(uint256 /* tokenId */ ) public view override returns (string memory) {
         string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER, "/", difficulty, ".png");
+        string memory difficultyValue = compareStrings(difficulty, "E") ? "easy"
+            : compareStrings(difficulty, "M") ? "medium"
+            : compareStrings(difficulty, "H") ? "hard"
+            : "???";
         return string(
             abi.encodePacked(
                 _baseURI(),
@@ -53,8 +62,12 @@ contract CyberjamHuntBase is ERC721 {
                         abi.encodePacked(
                             '{"name":"',
                             name(),
-                            '", "description":"You captured this NFT as part of the Hunt!", ',
-                            '"attributes": [{"trait_type": "skills", "value": 100}], "image":"',
+                            '", "description":"You captured this NFT by solving a solidity puzzle!", ',
+                            '"attributes": [{"trait_type": "difficulty", "value":',
+                            difficultyValue,
+                            '}, {"trait_type": "level", "value":',
+                            level,
+                            '}], "image":"',
                             tokenURL,
                             '"}'
                         )
@@ -70,5 +83,10 @@ contract CyberjamHuntBase is ERC721 {
 
     function getTokenCounter() public view returns (uint256) {
         return s_tokenCounter;
+    }
+
+    // House Keeping
+    function compareStrings(string memory a, string memory b) public pure returns (bool) {
+        return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
     }
 }

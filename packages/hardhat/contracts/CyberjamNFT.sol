@@ -7,15 +7,13 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "./interfaces/ICyberjamHuntBase.sol";
 import "./base64-sol/base64.sol";
 
-contract HuntRegisterNFT is ERC721, Ownable {
+contract CyberjamNFT is ERC721, Ownable {
     enum Team { Cat, Dog } // Enum for the two teams
 
     struct Player {
         address addr;
         Team team;
         string codename;
-        uint256 score;
-        uint256 level;
     }
 
     Player[] public players; // Array of players instead of teams
@@ -39,10 +37,8 @@ contract HuntRegisterNFT is ERC721, Ownable {
     //      L 2.png
     string public constant TOKEN_IMAGE_FOLDER_CID = "QmQ376dPDNZrKb2E2GVEaeTWxpMvLUvprn1tRRd4qtBT19";
 
-    // TODO: FE integation test
     // Events
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
-    event TeamScoreUpdated(Team team, uint256 newScore);
 
     constructor(address owner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(owner){
         tokenCounter = 0;
@@ -65,7 +61,7 @@ contract HuntRegisterNFT is ERC721, Ownable {
 
     function registerPlayerAndMintNft(string memory teamString, string memory codename) external {
         Team team = _stringToTeam(teamString);
-        players.push(Player(msg.sender, team, codename, 0, 0));
+        players.push(Player(msg.sender, team, codename));
         _safeMint(msg.sender, tokenCounter);
         tokenIdFromPlayerAddress[msg.sender] = tokenCounter ++;
         emit PlayerRegistered(codename, msg.sender, team, 0, 0);
@@ -89,30 +85,25 @@ contract HuntRegisterNFT is ERC721, Ownable {
         return teamScore;
     }
 
-    // Note: Score used for NFT attributes
-    function _updatePlayerScore(address playerAddress) private returns (uint256) {
+    // score is used in tokenURI score attribute
+    function getPlayerScore(address playerAddress) public view returns (uint256) {
         uint256 playerScore = 0;
         for (uint256 i = 0; i < gameAddresses.length; i++) {
             if (ICyberjamHuntBase(gameAddresses[i]).hasNft(playerAddress)) {
                 playerScore++;
             }
         }
-        uint256 tokenId = tokenIdFromPlayerAddress[playerAddress];
-        players[tokenId].score = playerScore;
         return playerScore;
     }
 
-    // Level used for NFT attributes
-    function updatePlayerLevel(address playerAddress) public returns (uint256) {
-        uint256 playerScore = _updatePlayerScore(playerAddress);
+    // level is used for NFT attributes
+    function getPlayerLevel(address playerAddress) public view returns (uint256) {
+        uint256 playerScore = getPlayerScore(playerAddress);
         uint256 level = 5 > playerScore && playerScore > 0
             ? 1
             : playerScore == 5
             ? 3
             : 0;
-
-        uint256 tokenId = tokenIdFromPlayerAddress[playerAddress];
-        players[tokenId].level = level;
         return level;
     }
 
@@ -134,19 +125,14 @@ contract HuntRegisterNFT is ERC721, Ownable {
         return players;
     }
 
-    // Q: Why do we need this?
-    // function addPlayerAddress(address playerAddress, Team team, string memory codename) external onlyOwner {
-    //     players.push(Player(playerAddress, team, codename, score));
-    // }
-
     function _baseURI() internal pure override returns (string memory) {
         return "data:application/json;base64,";
     }
-    // Note: on nftMinted() evnet, 
-    // updatePlayerScore, updatePlayerLevel() have to be called to fetch the latest score.
+
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        string memory playerScore = Strings.toString(players[tokenId].score);
-        string memory playerLevel = Strings.toString(players[tokenId].level);
+        uint256 score = getPlayerScore(players[tokenId].addr);
+        string memory playerScore = Strings.toString(score);
+        string memory playerLevel = Strings.toString(getPlayerLevel(players[tokenId].addr));
         string memory playerTeam = players[tokenId].team == Team.Cat ? "Cat" : "Dog"; // Cat or Dog
         string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER_CID, "/", playerTeam, "/", playerLevel, ".png");
         return string(
@@ -172,8 +158,11 @@ contract HuntRegisterNFT is ERC721, Ownable {
         );
     }
 
+    // Refresh: 
     function tokenURIByPlayer(address player) public view returns (string memory) {
         uint256 tokenId = tokenIdFromPlayerAddress[player];
         return tokenURI(tokenId);
     }
+
+
 }
