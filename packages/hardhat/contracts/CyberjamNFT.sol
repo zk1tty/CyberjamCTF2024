@@ -96,6 +96,16 @@ contract CyberjamNFT is ERC721, Ownable {
         return playerScore;
     }
 
+    // for leaderboard page
+    function getPlayersScores() public view returns (uint256[] memory) {
+        uint256[] memory playerScores = new uint256[](30);
+        for (uint256 i = 0; i < players.length; i++) {
+            address plaerAddr = players[i].addr;
+            playerScores[i] = (getPlayerScore(plaerAddr));
+        }
+        return playerScores;
+    }
+
     // level is used for NFT attributes
     function getPlayerLevel(address playerAddress) public view returns (uint256) {
         uint256 playerScore = getPlayerScore(playerAddress);
