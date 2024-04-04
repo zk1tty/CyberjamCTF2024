@@ -8,6 +8,16 @@
 
 🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins'  Star Wars CTF using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
 
+## Quiz contracts
+- Easy
+  - E1: https://sepolia.etherscan.io/address/0x889aB5BdD6Bf46cbf9AB6a3fa7FF8D6842D541C7
+  - E2: https://sepolia.etherscan.io/address/0xFE52f9B9A89b7b5BBA24410D7ebea0482FC8DB1b
+- Medium:
+  - M1:
+  - M2:
+- Difficult:
+  - H1:
+
 ## Original quiz from last year
 Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https://sepolia.etherscan.io/address/0xD2Ef69fABB5B95264BFea552BcAD27567ea2C8c3#code).  
 1st game address is [here](https://sepolia.etherscan.io/address/0x25154bFa7f78e5898ac038cA98b84F0efD1A406e)
