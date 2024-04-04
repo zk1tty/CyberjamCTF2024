@@ -4,6 +4,407 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  // Sepolia ChainId
+  11155111: {
+    CyberjamNFT: {
+      address: "0x27448c18417c1118Bfd2057bc225A229a5D2fba1",
+      abi: [
+        {
+          inputs: [{ internalType: "address", name: "owner", type: "address" }],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "sender", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+            { internalType: "address", name: "owner", type: "address" },
+          ],
+          name: "ERC721IncorrectOwner",
+          type: "error",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "operator", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "ERC721InsufficientApproval",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "approver", type: "address" }],
+          name: "ERC721InvalidApprover",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "operator", type: "address" }],
+          name: "ERC721InvalidOperator",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "owner", type: "address" }],
+          name: "ERC721InvalidOwner",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "receiver", type: "address" }],
+          name: "ERC721InvalidReceiver",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "sender", type: "address" }],
+          name: "ERC721InvalidSender",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+          name: "ERC721NonexistentToken",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "owner", type: "address" }],
+          name: "OwnableInvalidOwner",
+          type: "error",
+        },
+        {
+          inputs: [{ internalType: "address", name: "account", type: "address" }],
+          name: "OwnableUnauthorizedAccount",
+          type: "error",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: true, internalType: "address", name: "owner", type: "address" },
+            { indexed: true, internalType: "address", name: "approved", type: "address" },
+            { indexed: true, internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "Approval",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: true, internalType: "address", name: "owner", type: "address" },
+            { indexed: true, internalType: "address", name: "operator", type: "address" },
+            { indexed: false, internalType: "bool", name: "approved", type: "bool" },
+          ],
+          name: "ApprovalForAll",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
+            { indexed: true, internalType: "address", name: "newOwner", type: "address" },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: false, internalType: "string", name: "codename", type: "string" },
+            { indexed: true, internalType: "address", name: "playerAddress", type: "address" },
+            { indexed: false, internalType: "enum CyberjamNFT.Team", name: "team", type: "uint8" },
+            { indexed: false, internalType: "uint256", name: "score", type: "uint256" },
+            { indexed: false, internalType: "uint256", name: "level", type: "uint256" },
+          ],
+          name: "PlayerRegistered",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: true, internalType: "address", name: "from", type: "address" },
+            { indexed: true, internalType: "address", name: "to", type: "address" },
+            { indexed: true, internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "Transfer",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "TOKEN_IMAGE_FOLDER_CID",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "gameAddress", type: "address" }],
+          name: "addGameAddress",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "to", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "approve",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "owner", type: "address" }],
+          name: "balanceOf",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPlayers",
+          outputs: [
+            {
+              components: [
+                { internalType: "address", name: "addr", type: "address" },
+                { internalType: "enum CyberjamNFT.Team", name: "team", type: "uint8" },
+                { internalType: "string", name: "codename", type: "string" },
+              ],
+              internalType: "struct CyberjamNFT.Player[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+          name: "getApproved",
+          outputs: [{ internalType: "address", name: "", type: "address" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "gameId", type: "uint256" }],
+          name: "getGameAddress",
+          outputs: [{ internalType: "address", name: "", type: "address" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getNumberOfPlayers",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "player", type: "address" }],
+          name: "getPlayerInfo",
+          outputs: [
+            {
+              components: [
+                { internalType: "address", name: "addr", type: "address" },
+                { internalType: "enum CyberjamNFT.Team", name: "team", type: "uint8" },
+                { internalType: "string", name: "codename", type: "string" },
+              ],
+              internalType: "struct CyberjamNFT.Player",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "playerAddress", type: "address" }],
+          name: "getPlayerLevel",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "playerAddress", type: "address" }],
+          name: "getPlayerScore",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPlayersLevels",
+          outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getPlayersScores",
+          outputs: [{ internalType: "uint256[]", name: "", type: "uint256[]" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "string", name: "teamString", type: "string" }],
+          name: "getTeamScore",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "owner", type: "address" },
+            { internalType: "address", name: "operator", type: "address" },
+          ],
+          name: "isApprovedForAll",
+          outputs: [{ internalType: "bool", name: "", type: "bool" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [{ internalType: "address", name: "", type: "address" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+          name: "ownerOf",
+          outputs: [{ internalType: "address", name: "", type: "address" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          name: "players",
+          outputs: [
+            { internalType: "address", name: "addr", type: "address" },
+            { internalType: "enum CyberjamNFT.Team", name: "team", type: "uint8" },
+            { internalType: "string", name: "codename", type: "string" },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "string", name: "teamString", type: "string" },
+            { internalType: "string", name: "codename", type: "string" },
+          ],
+          name: "registerPlayerAndMintNft",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        { inputs: [], name: "renounceOwnership", outputs: [], stateMutability: "nonpayable", type: "function" },
+        {
+          inputs: [
+            { internalType: "address", name: "from", type: "address" },
+            { internalType: "address", name: "to", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "safeTransferFrom",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "from", type: "address" },
+            { internalType: "address", name: "to", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+            { internalType: "bytes", name: "data", type: "bytes" },
+          ],
+          name: "safeTransferFrom",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "operator", type: "address" },
+            { internalType: "bool", name: "approved", type: "bool" },
+          ],
+          name: "setApprovalForAll",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],
+          name: "supportsInterface",
+          outputs: [{ internalType: "bool", name: "", type: "bool" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "", type: "address" }],
+          name: "tokenIdFromPlayerAddress",
+          outputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
+          name: "tokenURI",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "player", type: "address" }],
+          name: "tokenURIByPlayer",
+          outputs: [{ internalType: "string", name: "", type: "string" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            { internalType: "address", name: "from", type: "address" },
+            { internalType: "address", name: "to", type: "address" },
+            { internalType: "uint256", name: "tokenId", type: "uint256" },
+          ],
+          name: "transferFrom",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {
+        approve: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        balanceOf: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        getApproved: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        isApprovedForAll: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        name: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        ownerOf: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        safeTransferFrom: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        setApprovalForAll: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        supportsInterface: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        symbol: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        tokenURI: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        transferFrom: "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        owner: "@openzeppelin/contracts/access/Ownable.sol",
+        renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
+        transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
+      },
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;
