@@ -1,14 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+// import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+  // const { address: connectedAddress } = useAccount();
   const { data: numberOfPlayers } = useScaffoldContractRead({
     contractName: "CyberjamNFT",
     functionName: "getNumberOfPlayers",
@@ -43,72 +41,34 @@ const Home: NextPage = () => {
         <div className="px-5">
           <h1 className="text-center">
             <span className="block text-2xl mb-2">Hooty</span>
-            <span className="block text-4xl font-bold">{numberOfPlayers ? numberOfPlayers.toString() : 0}</span>
+            <span className="block text-4xl font-bold">
+              {numberOfPlayers ? numberOfPlayers.toString() : 0} players!
+            </span>
           </h1>
           <div className="flex justify-center items-center space-x-2">
             <img src="/catbg.png" alt="Cat" width={100} height={100} />
             <img src="/doge-removebg-preview.png" alt="Dog" width={100} height={100} />
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
+            {/* <p className="my-2 font-medium">Connected Address:</p>
+            <Address address={connectedAddress} /> */}
           </div>
 
           {playersLevels &&
             playersScores &&
             allPlayers?.map((player, index) => (
-              <div key={index} className="flex justify-center items-center my-4">
-                <p className="font-bold">{player.codename}</p>
+              <div key={index} className="flex justify-between items-center my-4 bg-base-100 rounded-md">
+                <p className="bg-base-300 px-2 mx-2 rounded-md">{player.codename}:</p>
+                <p className="text-xl font-bold mx-2">🕵🏽‍♀️{playersScores[index].toString()} Captured 🚩</p>
                 <Address address={player.addr} />
-                <p>{playersScores[index].toString()}</p>
+
                 <img
                   src={`/nftimages/${player.team === 0 ? "Cat" : "Dog"}/${playersLevels[index].toString()}.jpg`}
                   alt="NFT Image"
-                  width={100}
-                  height={100}
+                  className="rounded-3xl mx-2"
+                  width={50}
+                  height={50}
                 />
               </div>
             ))}
-
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
-
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contracts
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </>
