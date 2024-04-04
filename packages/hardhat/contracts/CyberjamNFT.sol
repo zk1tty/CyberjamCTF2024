@@ -16,6 +16,8 @@ contract CyberjamNFT is ERC721, Ownable {
         string codename;
     }
 
+    uint256 public midLevel = 3;
+
     Player[] public players; // Array of players instead of teams
 
     address[] private gameAddresses;
@@ -35,12 +37,12 @@ contract CyberjamNFT is ERC721, Ownable {
     //      L 0.png
     //      L 1.png
     //      L 2.png
-    string public constant TOKEN_IMAGE_FOLDER_CID = "QmQ376dPDNZrKb2E2GVEaeTWxpMvLUvprn1tRRd4qtBT19";
+    string public constant TOKEN_IMAGE_FOLDER_CID = "QmeRuy3Eziq64XAyFQonvRQEhQTVfenuAvWQegGKaM9TFo";
 
     // Events
     event PlayerRegistered(string codename, address indexed playerAddress, Team team, uint256 score, uint256 level);
 
-    constructor(address owner) ERC721("HuntRegisterNFT", "HRNFT") Ownable(owner){
+    constructor(address owner) ERC721("CyberjamNFT", "CJNFT") Ownable(owner){
         tokenCounter = 0;
     }
 
@@ -123,14 +125,18 @@ contract CyberjamNFT is ERC721, Ownable {
         for (uint256 i = 0; i < players.length; i++) {
             address plaerAddr = players[i].addr;
             uint256 playerScore = getPlayerScore(plaerAddr);
-            uint256 level = 5 > playerScore && playerScore > 0
+            uint256 level = midLevel > playerScore && playerScore > 0
             ? 1
-            : playerScore == 5
+            : playerScore == midLevel
             ? 3
             : 0;
             playerLevels[i] = level;
         }
         return playerLevels;
+    }
+
+    function setMidLevel(uint256 _midLevel) external onlyOwner {
+        midLevel = _midLevel;
     }
 
     function getNumberOfPlayers() external view returns (uint256) {
@@ -159,10 +165,10 @@ contract CyberjamNFT is ERC721, Ownable {
         uint256 score = getPlayerScore(players[tokenId].addr);
         string memory playerScore = Strings.toString(score);
         string memory playerLevel = Strings.toString(getPlayerLevel(players[tokenId].addr));
-        string memory playerTeam = players[tokenId].team == Team.Cat ? "Kitty" : "Doge"; 
+        string memory playerTeam = players[tokenId].team == Team.Cat ? "Cat" : "Dog"; 
         string memory animalSound = players[tokenId].team == Team.Cat ? "Meow Meow" : "Woof Woof";
         string memory animal = players[tokenId].team == Team.Cat ? "cat" : "doge";
-        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER_CID, "/", playerTeam, "/", playerLevel, ".png");
+        string memory tokenURL = string.concat("ipfs://", TOKEN_IMAGE_FOLDER_CID, "/", playerTeam, "/", playerLevel, ".jpg");
         return string(
             abi.encodePacked(
                 _baseURI(),
@@ -178,11 +184,11 @@ contract CyberjamNFT is ERC721, Ownable {
                             ' with ',
                             playerScore,
                             ' number of points.", ',
-                            '"attributes": [{"trait_type": "Team", "value":',
+                            '"attributes": [{"trait_type": "Team", "value":"',
                             playerTeam,
-                            '}, {"trait_type": "Score", "value":',
+                            '"}, {"trait_type": "Score", "value":',
                             playerScore,
-                            '}, {"trait_type": "Level", "value":',
+                            '}, {"trait_type": "Evolution", "value":',
                             playerLevel,
                             '}], "image":"',
                             tokenURL,

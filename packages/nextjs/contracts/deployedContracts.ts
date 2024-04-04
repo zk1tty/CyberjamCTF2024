@@ -8,7 +8,7 @@ const deployedContracts = {
   // Sepolia ChainId
   11155111: {
     CyberjamNFT: {
-      address: "0x27448c18417c1118Bfd2057bc225A229a5D2fba1",
+      address: "0x1db3Ad39cC1a0A1e6Ef054E9c1AbcD073b01F24E",
       abi: [
         {
           inputs: [{ internalType: "address", name: "owner", type: "address" }],
@@ -258,6 +258,13 @@ const deployedContracts = {
         },
         {
           inputs: [],
+          name: "midLevel",
+          outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
           name: "name",
           outputs: [{ internalType: "string", name: "", type: "string" }],
           stateMutability: "view",
@@ -333,6 +340,13 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [{ internalType: "uint256", name: "_midLevel", type: "uint256" }],
+          name: "setMidLevel",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],
           name: "supportsInterface",
           outputs: [{ internalType: "bool", name: "", type: "bool" }],
@@ -356,13 +370,6 @@ const deployedContracts = {
         {
           inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
           name: "tokenURI",
-          outputs: [{ internalType: "string", name: "", type: "string" }],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [{ internalType: "address", name: "player", type: "address" }],
-          name: "tokenURIByPlayer",
           outputs: [{ internalType: "string", name: "", type: "string" }],
           stateMutability: "view",
           type: "function",
