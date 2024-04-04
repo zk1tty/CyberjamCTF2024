@@ -40,13 +40,15 @@ const Home: NextPage = () => {
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
-            <span className="block text-2xl mb-2">Hooty</span>
+            <span className="block text-2xl mb-2">Welcome to Cyberjam Capture The Flag</span>
             <span className="block text-4xl font-bold">
               {numberOfPlayers ? numberOfPlayers.toString() : 0} players!
             </span>
           </h1>
+          <h2></h2>
           <div className="flex justify-center items-center space-x-2">
             <img src="/catbg.png" alt="Cat" width={100} height={100} />
+            <img src="./QR-cyberjam.png" width={100} height={100} />
             <img src="/doge-removebg-preview.png" alt="Dog" width={100} height={100} />
             {/* <p className="my-2 font-medium">Connected Address:</p>
             <Address address={connectedAddress} /> */}
