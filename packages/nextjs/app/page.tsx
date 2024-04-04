@@ -1,22 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import NFTImageViewer from "./NFTImageViewer";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const { data: numberOfPlayers } = useScaffoldContractRead({
-    contractName: "HuntRegisterNFT",
+    contractName: "CyberjamNFT",
     functionName: "getNumberOfPlayers",
   });
 
   const { data: allPlayers } = useScaffoldContractRead({
-    contractName: "HuntRegisterNFT",
+    contractName: "CyberjamNFT",
     functionName: "getAllPlayers",
   });
 
@@ -26,20 +25,16 @@ const Home: NextPage = () => {
   //   args: [connectedAddress],
   // });
 
-  const { data: tokenURI } = useScaffoldContractRead({
-    contractName: "HuntRegisterNFT",
-    functionName: "tokenURIByPlayer",
-    args: [connectedAddress],
+  // return uint256[]
+  const { data: playersLevels } = useScaffoldContractRead({
+    contractName: "CyberjamNFT",
+    functionName: "getPlayersLevels",
   });
 
-  const { writeAsync } = useScaffoldContractWrite({
-    contractName: "HuntRegisterNFT",
-    functionName: "updatePlayerLevel",
-    args: [connectedAddress],
-    blockConfirmations: 1,
-    onBlockConfirmation: txnReceipt => {
-      console.log("Transaction blockHash", txnReceipt.blockHash);
-    },
+  // return uint256[]
+  const { data: playersScores } = useScaffoldContractRead({
+    contractName: "CyberjamNFT",
+    functionName: "getPlayersScores",
   });
 
   return (
@@ -57,29 +52,21 @@ const Home: NextPage = () => {
             <Address address={connectedAddress} />
           </div>
 
-          <>
-            <p className="text-center text-lg">
-              <li>1. Register to HuntRegisterNFT → Get your first NFT</li>
-              <li>2. Refresh current your score and level when you clear each quiz.</li>
-            </p>
-          </>
-          <h2 className="text-center">
-            <button className="btn btn-primary" onClick={() => writeAsync()}>
-              Refresh Score
-            </button>
-          </h2>
-
-          <NFTImageViewer metadataUrl={tokenURI ?? ""} />
-
-          {allPlayers?.map((player, index) => (
-            <div key={index} className="bg-base-100 p-4 rounded-lg my-4">
-              <p className="font-bold">Player: {player.codename}</p>
-              <p>Address: {player.addr}</p>
-              <p>Team: {player.team === 0 ? "Cat" : "Dog"}</p>
-              <p>Score: {player.score.toString()}</p>
-              <p>Level: {player.level.toString()}</p>
-            </div>
-          ))}
+          {playersLevels &&
+            playersScores &&
+            allPlayers?.map((player, index) => (
+              <div key={index} className="flex justify-center items-center my-4">
+                <p className="font-bold">{player.codename}</p>
+                <Address address={player.addr} />
+                <p>{playersScores[index].toString()}</p>
+                <img
+                  src={`/nftimages/${player.team === 0 ? "Cat" : "Dog"}/${playersLevels[index].toString()}.jpg`}
+                  alt="NFT Image"
+                  width={100}
+                  height={100}
+                />
+              </div>
+            ))}
 
           <p className="text-center text-lg">
             Get started by editing{" "}
