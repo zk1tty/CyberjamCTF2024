@@ -20,7 +20,7 @@
   - H1: https://sepolia.etherscan.io/address/0x628Fd33E3a2e1f0e86DAdFF4F7F68C9cE1e01CFc
 
 ## Original quiz from last year
-Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https://sepolia.etherscan.io/address/0xD2Ef69fABB5B95264BFea552BcAD27567ea2C8c3#code).  
+Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https://sepolia.etherscan.io/address/0xD2Ef69fABB5B95264BFea552BcAD27567ea2C8c3#code) (Thank you [Patrick](https://github.com/PatrickAlphaC/)!).  
 1st game address is [here](https://sepolia.etherscan.io/address/0x25154bFa7f78e5898ac038cA98b84F0efD1A406e)
 
 ## Interacting with Contracts
