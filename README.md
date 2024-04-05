@@ -6,7 +6,7 @@
   <a href="https://discord.gg/qe8ETgMskt">ETHChicago Discord</a> 
 </h4>
 
-🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins'  Star Wars CTF using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
+🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins' "Star Wars CTF" from the 2023 imnotHackathon BETA (alpha) using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
 
 ## Quiz contracts
 - Cyjerjam Register NFT: https://sepolia.etherscan.io/address/0x1db3Ad39cC1a0A1e6Ef054E9c1AbcD073b01F24E
