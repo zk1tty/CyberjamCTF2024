@@ -7,7 +7,7 @@ export const metadata = getMetadata({
   description: "Interact with Flag contracts in an easy way",
 });
 
-const Debug: NextPage = () => {
+const Flag: NextPage = () => {
   return (
     <>
       <DebugContracts />
@@ -25,4 +25,4 @@ const Debug: NextPage = () => {
   );
 };
 
-export default Debug;
+export default Flag;
