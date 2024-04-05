@@ -8,8 +8,19 @@
 
 🧪 ZKitty and Tippi Fifestarr hacked together this open-source, update to Patrick Collins'  Star Wars CTF using Scaffold-Eth-2 (a toolkit for building decentralized applications). It's designed to make it easier for developers and security curious attendees at the 2024 CypherCon to create and deploy smart contracts. 
 
+## Quiz contracts
+- Cyjerjam Register NFT: https://sepolia.etherscan.io/address/0x1db3Ad39cC1a0A1e6Ef054E9c1AbcD073b01F24E
+- Easy
+  - E1: https://sepolia.etherscan.io/address/0x889aB5BdD6Bf46cbf9AB6a3fa7FF8D6842D541C7
+  - E2: https://sepolia.etherscan.io/address/0xFE52f9B9A89b7b5BBA24410D7ebea0482FC8DB1b
+- Medium:
+  - M1: https://sepolia.etherscan.io/address/0xFdBF36B8ffd331ee89D84221C4b76c58787f3134
+  - M2: https://sepolia.etherscan.io/address/0x031f2f5Fb8EE5716EeE0F096B2142124AC3eAaf0
+- Difficult:
+  - H1: https://sepolia.etherscan.io/address/0x628Fd33E3a2e1f0e86DAdFF4F7F68C9cE1e01CFc
+
 ## Original quiz from last year
-Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https://sepolia.etherscan.io/address/0xD2Ef69fABB5B95264BFea552BcAD27567ea2C8c3#code).  
+Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https://sepolia.etherscan.io/address/0xD2Ef69fABB5B95264BFea552BcAD27567ea2C8c3#code) (Thank you [Patrick](https://github.com/PatrickAlphaC/)!).  
 1st game address is [here](https://sepolia.etherscan.io/address/0x25154bFa7f78e5898ac038cA98b84F0efD1A406e)
 
 ## Interacting with Contracts
