@@ -46,7 +46,7 @@ const Home: NextPage = () => {
             <img src="./registerFunction.png" width={400} />
            
           </div>
-           <a href="https://app.vennity.co/nft/b7b52aac-6293-422d-8a79-5363551b77be">clue for registration is hidden on event page here</a>
+           <a href="https://app.vennity.co/nft/b7b52aac-6293-422d-8a79-5363551b77be" target="_blank" rel="noreferrer" className="link">clue for registration is hidden on event page here</a>
           <h2 className="text-xl">4.get Flag contract address</h2>
           <h3>At Flag page, getGameAddress returns an array of Flag contract addresses.</h3>
           <h3>Try to call the function with 0 at first.</h3>
