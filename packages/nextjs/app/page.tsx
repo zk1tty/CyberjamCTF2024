@@ -42,7 +42,10 @@ const Home: NextPage = () => {
           <h2 className="text-xl">3. Register your codename and team</h2>
           <h3>go to Flag page, fill in registerAndMintNFT() function, and send tx.</h3>
           <div className="flex justify-center items-center">
+            
             <img src="./registerFunction.png" width={400} />
+          <p>clue for registration is hidden on event page:</p>
+            <a href="https://app.vennity.co/nft/b7b52aac-6293-422d-8a79-5363551b77be">here</a>
           </div>
           <h2 className="text-xl">4.get Flag contract address</h2>
           <h3>At Flag page, getGameAddress returns an array of Flag contract addresses.</h3>
