@@ -36,12 +36,12 @@ Original HuntRegistration contract on Sepolia Ethereum testnet is [here](https:/
    - [ ] Center a current score counter for each team.
 
 2. Leaderboard:
-   - [ ] Display a list of the players leaderboard with the following information:
+   - [x] Display a list of the players leaderboard with the following information:
      - [ ] Ranking #
      - [x] Codename & address
      - [x] Team
-     - [ ] Small dynamic NFT image
-     - [ ] Score
+     - [x] Small dynamic NFT image
+     - [x] Score
 
 3. Refresh Button:
    - [ ] Include a refresh button that triggers a read function using the useContractRead hook to fetch the latest scores or leaderboard data.
